@@ -19,7 +19,7 @@ public class Main {
     	produto.setNome("Vasilina");
     	Secao secao = new Secao();
     	secao.setNome("SecaoDeVasilina");
-    	produto.setSecao(null);
+    	produto.setSecao(secao);
     	
     	ProdutoDAO produtoDAO = new ProdutoDAO();
     	produtoDAO.insertOrUpdate(produto);

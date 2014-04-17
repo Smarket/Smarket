@@ -27,7 +27,7 @@ public class Secao {
 	private int yInicial;
 	@NotNull
 	private int yFinal;
-	@OneToMany(targetEntity = Produto.class, mappedBy = "secao", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@OneToMany(targetEntity = Produto.class, mappedBy = "secao", fetch=FetchType.LAZY, cascade=CascadeType.PERSIST)
 	private List<Produto> produtos;
 	
 	public Secao() {
