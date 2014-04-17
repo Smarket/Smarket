@@ -9,6 +9,6 @@ public class BaseDAO <T>{
         Transaction t = sessao.beginTransaction();
         sessao.saveOrUpdate(instancia);
         t.commit();
-        sessao.getSessionFactory().close();
+       // sessao.getSessionFactory().close();
 	}
 }
