@@ -4,8 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.*;
-
+import javax.persistence.ForeignKey;
+import javax.persistence.JoinColumn;
 import com.sun.istack.internal.NotNull;
 
 @Entity
@@ -22,6 +22,7 @@ public class Produto {
 	private boolean baixaTemperatura;
 	@NotNull
 	@ManyToOne
+	@JoinColumn(foreignKey=@ForeignKey(name="fk_ProdutoSecao"), nullable=false)
 	private Secao secao;
 	
 	public Produto() {
