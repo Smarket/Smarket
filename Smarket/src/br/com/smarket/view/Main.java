@@ -11,8 +11,8 @@ public class Main {
 
     	Usuario user = new Usuario();
     	user.setAdministrador(false);
-    	user.setLogin("Yhuyuyjhggjti");
-    	user.setSenha("56456");
+    	user.setLogin("Yuri");
+    	user.setSenha("123");
     	UsuarioController.CadastrarUsuario(user);
     	
     	Produto produto = new Produto();
