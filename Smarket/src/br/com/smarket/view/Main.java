@@ -9,11 +9,11 @@ public class Main {
     public static void main(String[] args) {
     	try{
 
-    	/*Usuario user = new Usuario();
+    	Usuario user = new Usuario();
     	user.setAdministrador(false);
     	user.setLogin("Yhuyuyjhggjti");
     	user.setSenha("56456");
-    	UsuarioController.CadastrarUsuario(user);*/
+    	UsuarioController.CadastrarUsuario(user);
     	
     	Produto produto = new Produto();
     	produto.setNome("Vasilina");
