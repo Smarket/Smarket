@@ -1,5 +1,6 @@
 package br.com.smarket.view;
 
+import java.util.List;
 import br.com.smarket.controller.UsuarioController;
 import br.com.smarket.dao.ProdutoDAO;
 import br.com.smarket.dao.SecaoDAO;
@@ -9,26 +10,12 @@ public class Main {
 	
     public static void main(String[] args) {
     	try{
-
-
-    	/*Usuario user = new Usuario();
-    	user.setAdministrador(false);
-    	user.setLogin("Yuri");
-    	user.setSenha("123");
-    	UsuarioController.CadastrarUsuario(user);*/
     		
-    		Secao secao = new Secao();
-        	secao.setNome("SecaoDeVasilina");
-        	SecaoDAO secaoDAO = new SecaoDAO();
-        	secaoDAO.insertOrUpdate(secao);
-            
-        	Produto produto = new Produto();
-        	produto.setNome("Vasilina");
-        	produto.setSecao(secao);
-        	
-        	ProdutoDAO produtoDAO = new ProdutoDAO();
-        	produtoDAO.insertOrUpdate(produto);
-
+    		/* Testando listagem
+	    	List<Usuario> listaDeUsuarios = UsuarioController.buscarUsuarios();
+	    	for(Usuario usuario : listaDeUsuarios) {
+	            System.out.println(usuario.getLogin());
+	        }*/
     	}
     	catch(Throwable ex)
     	{

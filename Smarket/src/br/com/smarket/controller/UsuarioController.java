@@ -1,37 +1,43 @@
 package br.com.smarket.controller;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import br.com.smarket.dao.UsuarioDAO;
 import br.com.smarket.model.Usuario;
 
+// Os metodos serão estáticos? Fiz assim pois já tinha-se começado a fazer desse modo.
+// Exceções devem ser tratadas na classe Controller ou fora dela?
+
 public class UsuarioController extends Controller{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4219635448516257481L;
-
-	public static void CadastrarUsuario(Usuario usuario) throws Throwable
+	
+	private static UsuarioDAO usuarioDAO = new UsuarioDAO();
+	
+	private static Usuario criarUsuario() //como os dados são obtidos para criar o usuário?
 	{
-		
-		UsuarioDAO produtoDao = new UsuarioDAO();
-		produtoDao.insertOrUpdate(usuario);
+		Usuario usuario = new Usuario();
+		return usuario;
 	}
 	
-	public void AlterarUsuario(Usuario usuario)
+	public static void cadastrarUsuario() throws Exception 
 	{
-		
+		// Usuario usuario = criarUsuario();
+		// usuarioDAO.insertOrUpdate(usuario);
 	}
 	
-	public void RemoverUsuario(Usuario usuario)
+	public static void alterarUsuario() throws Exception
 	{
-		
+		// Usuario usuario = criarUsuario();
+		// usuarioDAO.insertOrUpdate(usuario);
 	}
 	
-	public List<Usuario> BuscarUsuarios()
+	public static void removerUsuario() throws Exception
 	{
-		return new ArrayList<Usuario>();
+		// usuarioDAO.delete(login);
+	}
+	
+	public static List<Usuario> buscarUsuarios() throws Exception
+	{
+		return usuarioDAO.listar();
 	}
 }

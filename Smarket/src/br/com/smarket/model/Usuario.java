@@ -40,4 +40,16 @@ public class Usuario {
 	public void setAdministrador(boolean isAdministrador) {
 		this.administrador = isAdministrador;
 	}
+	
+	/*
+	O atributo autenticado será usado?
+	public boolean getAutenticado(){
+		return autenticado;
+	}
+	
+	Esse método ficará na Model?
+	public void autenticar(String senha){
+		
+	}
+	*/
 }
