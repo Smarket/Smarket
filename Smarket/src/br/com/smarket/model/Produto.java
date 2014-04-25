@@ -1,26 +1,27 @@
 package br.com.smarket.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import com.sun.istack.internal.NotNull;
 
 @Entity
 public class Produto {
 		
     @Id
-    @NotNull
     @GeneratedValue
 	private long id;
-    @NotNull
+    @Column(nullable=false)
 	private String nome;
+    @Column(nullable=false)
 	private double peso;
-	@NotNull
+	@Column(nullable=false)
 	private boolean baixaTemperatura;
-	@NotNull
 	@ManyToOne
 	@JoinColumn(foreignKey=@ForeignKey(name="fk_ProdutoSecao"), nullable=false)
 	private Secao secao;

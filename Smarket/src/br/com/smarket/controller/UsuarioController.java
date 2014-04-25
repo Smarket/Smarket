@@ -1,6 +1,7 @@
 package br.com.smarket.controller;
 
 import java.util.List;
+
 import br.com.smarket.dao.UsuarioDAO;
 import br.com.smarket.model.Usuario;
 
@@ -19,24 +20,24 @@ public class UsuarioController extends Controller{
 		return usuario;
 	}
 	
-	public static void cadastrarUsuario() throws Exception 
+	public static void cadastrarUsuario()
 	{
 		// Usuario usuario = criarUsuario();
 		// usuarioDAO.insertOrUpdate(usuario);
 	}
 	
-	public static void alterarUsuario() throws Exception
+	public static void alterarUsuario() 
 	{
 		// Usuario usuario = criarUsuario();
 		// usuarioDAO.insertOrUpdate(usuario);
 	}
 	
-	public static void removerUsuario() throws Exception
+	public static void removerUsuario() 
 	{
 		// usuarioDAO.delete(login);
 	}
 	
-	public static List<Usuario> buscarUsuarios() throws Exception
+	public static List<Usuario> buscarUsuarios()
 	{
 		return usuarioDAO.listar();
 	}

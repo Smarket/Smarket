@@ -9,29 +9,26 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-
-import com.sun.istack.internal.NotNull;
 
 @Entity
 public class Secao {
-	
+
 	@Id
 	@GeneratedValue
 	private long id;
 	private String nome;
-	@NotNull
+	@Column(nullable = false)
 	private int xInicial;
-	@NotNull
+	@Column(nullable = false)
 	private int xFinal;
-	@NotNull
+	@Column(nullable = false)
 	private int yInicial;
-	@NotNull
+	@Column(nullable = false)
 	private int yFinal;
-	@OneToMany(targetEntity = Produto.class, mappedBy = "secao", fetch=FetchType.LAZY, cascade=CascadeType.PERSIST)
+	@OneToMany(targetEntity = Produto.class, mappedBy = "secao", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private List<Produto> produtos;
-	
+
 	public Secao() {
 		this.setId(0);
 		this.setNome("");
@@ -93,7 +90,8 @@ public class Secao {
 	public List<Produto> getProdutos() {
 		return produtos;
 	}
-	public void setProdutos(List<Produto> produtos){
+
+	public void setProdutos(List<Produto> produtos) {
 		this.produtos = produtos;
 	}
 }
