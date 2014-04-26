@@ -12,6 +12,14 @@ public abstract class BaseDAO <T>{
 	
 	private Session sessao;
 	
+	public Session getSessao() {
+		return sessao;
+	}
+
+	public void setSessao(Session sessao) {
+		this.sessao = sessao;
+	}
+
 	public void insertOrUpdate(T instancia){
 		this.sessao = HibernateUtil.getSessionFactory().openSession();
         Transaction t = sessao.beginTransaction();

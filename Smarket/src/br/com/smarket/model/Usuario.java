@@ -1,5 +1,6 @@
 package br.com.smarket.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -8,12 +9,12 @@ public class Usuario {
 	
 	@Id
 	private String login;
+	@Column(nullable=false)
 	private String senha;
 	private boolean administrador; 
+	private boolean autenticado; 
 	
 	public Usuario() {
-		this.setLogin("");
-		this.setSenha("");
 		this.setAdministrador(false);
 	}
 
@@ -41,15 +42,14 @@ public class Usuario {
 		this.administrador = isAdministrador;
 	}
 	
-	/*
-	O atributo autenticado será usado?
 	public boolean getAutenticado(){
 		return autenticado;
 	}
 	
-	Esse método ficará na Model?
 	public void autenticar(String senha){
+		this.setSenha(senha);
+		this.autenticado = true;
 		
 	}
-	*/
+	
 }

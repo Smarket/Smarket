@@ -4,8 +4,6 @@ import java.util.List;
 import br.com.smarket.dao.ProdutoDAO;
 import br.com.smarket.model.Produto;
 
-//Os metodos serão estáticos? Fiz assim pois já tinha-se começado a fazer desse modo.
-//Exceções devem ser tratadas na classe Controller ou fora dela?
 
 public class ProdutoController extends Controller{
 

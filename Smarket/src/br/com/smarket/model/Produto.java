@@ -8,8 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.sun.istack.internal.NotNull;
-
 @Entity
 public class Produto {
 		

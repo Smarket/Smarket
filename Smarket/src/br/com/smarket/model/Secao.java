@@ -30,7 +30,6 @@ public class Secao {
 	private List<Produto> produtos;
 
 	public Secao() {
-		this.setId(0);
 		this.setNome("");
 		this.setxFinal(0);
 		this.setxInicial(0);

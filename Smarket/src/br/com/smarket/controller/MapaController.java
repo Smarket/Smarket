@@ -4,7 +4,6 @@ import java.util.List;
 import br.com.smarket.dao.SecaoDAO;
 import br.com.smarket.model.Secao;
 
-//Os metodos serão estáticos? Fiz assim pois já tinha-se começado a fazer desse modo.
 
 public class MapaController extends Controller{
 
@@ -12,7 +11,7 @@ public class MapaController extends Controller{
 	
 	private static SecaoDAO secaoDAO;
 	
-	public static void gerarMapa(List secoes)
+	public static void gerarMapa(List<Secao> secoes)
 	{
 	}
 	
