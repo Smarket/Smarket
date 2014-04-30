@@ -5,6 +5,11 @@ import java.io.*;
 
 public class Controller implements ActionListener, AdjustmentListener, ItemListener, MouseListener, KeyListener, Serializable, TextListener{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public void textValueChanged(TextEvent arg0) {
 		// TODO Auto-generated method stub
 		

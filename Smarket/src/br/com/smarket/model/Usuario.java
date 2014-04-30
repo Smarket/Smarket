@@ -17,6 +17,16 @@ public class Usuario {
 	public Usuario() {
 		this.setAdministrador(false);
 	}
+	
+	@Override
+	public String toString() {
+		return this.getLogin();
+	}
+	
+	@Override
+	public boolean equals(Object usuario) {
+		return this.getLogin().equals(((Usuario) usuario).getLogin());
+	}
 
 	public String getLogin() {
 		return login;

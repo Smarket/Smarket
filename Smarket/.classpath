@@ -2,12 +2,12 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="srcTestes"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre7"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Service Library">
 		<attributes>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="Smarket/hibernate-lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="hibernate-lib_new/antlr-2.7.7.jar"/>
 	<classpathentry kind="lib" path="hibernate-lib_new/dom4j-1.6.1.jar"/>
 	<classpathentry kind="lib" path="hibernate-lib_new/hibernate-commons-annotations-4.0.4.Final.jar"/>

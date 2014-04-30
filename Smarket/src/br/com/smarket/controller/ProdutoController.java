@@ -11,14 +11,9 @@ public class ProdutoController extends Controller{
 
 	private static ProdutoDAO produtoDAO = new ProdutoDAO();
 	
-	private static Produto criarProduto() //como os dados são obtidos para criar o produto?
+	public static void inserirProduto(Produto produto) throws Exception 
 	{
-		Produto produto = new Produto();
-		return produto;
-	}
-	
-	public static void inserirProduto() throws Exception 
-	{
+		// Valida objeto
 		// Produto produto = criarProduto();
 		// produtoDAO.insertOrUpdate(produto);
 	}

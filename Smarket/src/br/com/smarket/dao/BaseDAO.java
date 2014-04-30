@@ -24,7 +24,7 @@ public abstract class BaseDAO <T>{
 		this.sessao = HibernateUtil.getSessionFactory().openSession();
         Transaction t = sessao.beginTransaction();
         try{
-        	this.sessao.save(instancia);
+        	this.sessao.saveOrUpdate(instancia);
         	t.commit();
         } catch (HibernateException e){
         	e.printStackTrace();

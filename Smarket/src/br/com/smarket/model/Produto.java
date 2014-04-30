@@ -31,6 +31,16 @@ public class Produto {
 		this.setBaixaTemperatura(false);
 		this.setSecao(null);
 	}
+	
+	@Override
+	public String toString() {
+		return this.getNome();
+	}
+	
+	@Override
+	public boolean equals(Object produto) {
+		return this.getId()==(((Produto)produto).getId());
+	}
 
 	public long getId() {
 		return id;

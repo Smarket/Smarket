@@ -15,22 +15,20 @@ public class SecaoController extends Controller{
 		this.secaoDAO = new SecaoDAO();
 	}
 	
-	private void criarSecao(Secao secao) //como os dados são obtidos para criar a seção?
+	public void inserirSecao(Secao secao) throws Exception
 	{
 		//Valida Objeto
-		
 		//Manda Inserir
-		
 		
 	}
 	
-	public void alterarSecao() throws Exception
+	public void alterarSecao(Secao secao) throws Exception
 	{
 		// Secao secao = criarSecao();
 		// secaoDAO.insertOrUpdate(secao);
 	}
 	
-	public void removerSecao() throws Exception
+	public void removerSecao(Secao secao) throws Exception
 	{
 		// secaoDAO.delete(id);
 	}

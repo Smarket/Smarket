@@ -2,7 +2,6 @@ package br.com.smarket.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,6 +35,16 @@ public class Secao {
 		this.setyFinal(0);
 		this.setyInicial(0);
 		this.setProdutos(new ArrayList<Produto>());
+	}
+	
+	@Override
+	public String toString() {
+		return this.getNome();
+	}
+	
+	@Override
+	public boolean equals(Object secao) {
+		return this.getId()==(((Secao) secao).getId());
 	}
 
 	public long getId() {
