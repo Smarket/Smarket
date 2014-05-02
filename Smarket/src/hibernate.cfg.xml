@@ -16,6 +16,7 @@
          <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">update</property>
 
+
         <mapping class="br.com.smarket.model.Produto"/>
         <mapping class="br.com.smarket.model.Secao"/>
         <mapping class="br.com.smarket.model.Usuario"/>

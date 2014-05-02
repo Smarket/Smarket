@@ -15,7 +15,17 @@ public class Usuario {
 	private boolean autenticado; 
 	
 	public Usuario() {
+		this.setLogin("");
+		this.setSenha("");
 		this.setAdministrador(false);
+		this.setAutenticado(false);
+	}
+	
+	public Usuario(String login, String senha, boolean admin, boolean autent) {
+		this.setLogin(login);
+		this.setSenha(senha);
+		this.setAdministrador(admin);
+		this.setAutenticado(autent);
 	}
 	
 	@Override
@@ -54,6 +64,11 @@ public class Usuario {
 	
 	public boolean getAutenticado(){
 		return autenticado;
+	}
+	
+	public void setAutenticado(boolean autenticado)
+	{
+		this.autenticado=autenticado;
 	}
 	
 	public void autenticar(String senha){

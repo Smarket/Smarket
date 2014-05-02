@@ -14,7 +14,9 @@ public class SecaoDAO extends BaseDAO<Secao>{
 	public List<Secao> listar() {
 		this.setSessao(HibernateUtil.getSessionFactory().openSession());
 		Criteria criteria = this.getSessao().createCriteria(Secao.class);
+		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		List<Secao> lista =  criteria.list();
+		this.getSessao().clear();
 		return lista;
 	}
 

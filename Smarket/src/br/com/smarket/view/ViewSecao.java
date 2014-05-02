@@ -6,11 +6,16 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 
+
+
+import java.util.List;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
-import br.com.smarket.model.Produto;
+import br.com.smarket.controller.SecaoController;
+import br.com.smarket.model.Secao;
 
 public class ViewSecao extends JPanel{
 
@@ -19,7 +24,7 @@ public class ViewSecao extends JPanel{
 	JPanel pane;
 	JPanel paneOpcoes;
 	JScrollPane produtos_parent;
-	JList<Produto> produtos;
+	JList<Secao> listaSecoes;
 	JLabel sessoes;
 	JLabel nomeSessao;
 	JTextField nomeSessao_in;
@@ -38,12 +43,14 @@ public class ViewSecao extends JPanel{
     GridBagLayout gridbag;
     GridBagConstraints constraints;
     
+    SecaoController secaoController = new SecaoController();
+    
 	
 	public ViewSecao(){
 		
 			produtos_parent = new JScrollPane();
 			paneOpcoes = new JPanel();
-			produtos = new JList<Produto>();
+			listaSecoes = new JList<Secao>(new DefaultListModel<Secao>());
 			Border padding = BorderFactory.createEmptyBorder(10, 10, 10, 10);
 			this.setBorder(padding);
 			this.setPreferredSize(new Dimension(600,400));
@@ -58,10 +65,11 @@ public class ViewSecao extends JPanel{
 			
 			produtos_parent.setBounds(10, sessoes.getHeight()-5, 270, 337);
 			
-			produtos.setSize(sessoes.getWidth(), 400);
-			produtos.setBounds(0, 0, 270, 398);
-			produtos.setOpaque(true);
-			produtos.setBackground(Color.white);
+			listaSecoes.setSize(sessoes.getWidth(), 400);
+			listaSecoes.setBounds(0, 0, 270, 398);
+			listaSecoes.setOpaque(true);
+			listaSecoes.setBackground(Color.white);
+			listaSecoes.addListSelectionListener(secaoController);
 			
 			
 			nomeSessao = new JLabel("Nome da Seção");
@@ -84,17 +92,23 @@ public class ViewSecao extends JPanel{
 			coordenadaYFinal.setBounds(coordenadaYInicial.getX()+coordenadaYInicial.getWidth()+20, coordenadaYInicial.getY(), coordenadaYInicial.getWidth(), coordenadaYInicial.getHeight());
 			coordenadaYFinal_in = new JTextField();
 			coordenadaYFinal_in.setBounds(coordenadaYFinal.getX(), coordenadaYFinal.getY()+coordenadaYFinal.getHeight(), coordenadaXFinal_in.getWidth(), coordenadaXFinal_in.getHeight());
+			coordenadaYFinal_in.addKeyListener(secaoController);
+			
 			botaoNovo = new JButton("Novo");
 			botaoNovo.setBounds(10, 362, 80, 25);
+			botaoNovo.addActionListener(secaoController);
+			
 			botaoRemover = new JButton("Remover");
 			botaoRemover.setBounds(200, 362, 80, 25);
+			botaoRemover.addActionListener(secaoController);
 			
 			botaoSalvar = new JButton("Salvar");
 			botaoSalvar.setBounds(373, 327, 80, 25);
+			botaoSalvar.addActionListener(secaoController);
 			
 			this.add(sessoes);
 			this.add(produtos_parent);
-			produtos_parent.setViewportView(produtos);
+			produtos_parent.setViewportView(listaSecoes);
 			this.add(paneOpcoes);
 			this.add(botaoNovo);
 			this.add(botaoRemover);
@@ -109,12 +123,92 @@ public class ViewSecao extends JPanel{
 			paneOpcoes.add(coordenadaYFinal_in);
 			paneOpcoes.add(nomeSessao_in);
 			paneOpcoes.add(botaoSalvar);
-
+			paneOpcoes.setName("paneOpcoes");
 
 			produtos_parent.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 			produtos_parent.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 			produtos_parent.setBorder(new LineBorder(Color.LIGHT_GRAY));
 			
+			//this.atualizarLista();
+			
+	}
+	
+	public void atualizarLista()
+	{
+		DefaultListModel<Secao> listaSecaoModel = ((DefaultListModel<Secao>)this.listaSecoes.getModel());
+		int i = listaSecoes.getSelectedIndex();
+		listaSecaoModel.clear();
+		List<Secao> secoes = secaoController.listarSecoes();
+		for(Secao s : secoes)
+		{
+			listaSecaoModel.addElement(s);
+		}
+		listaSecoes.setSelectedIndex(i);
+		
+		
+	}
+	
+	public Secao getSecaoNova()
+	{
+		Secao s = new Secao();
+		s.setNome(nomeSessao_in.getText());
+		try{
+			if(coordenadaXFinal_in.getText()==null || coordenadaXFinal_in.getText().isEmpty()) s.setxFinal(0);
+			else s.setxFinal(Integer.parseInt(coordenadaXFinal_in.getText()));
+			if(coordenadaYFinal_in.getText()==null || coordenadaYFinal_in.getText().isEmpty()) s.setyFinal(0);
+			else s.setyFinal(Integer.parseInt(coordenadaYFinal_in.getText()));
+			if(coordenadaXInicial_in.getText()==null || coordenadaXInicial_in.getText().isEmpty()) s.setxInicial(0);
+			else s.setxInicial(Integer.parseInt(coordenadaXInicial_in.getText()));
+			if(coordenadaYInicial_in.getText()==null || coordenadaYInicial_in.getText().isEmpty()) s.setyFinal(0);
+			else s.setyInicial(Integer.parseInt(coordenadaYInicial_in.getText()));
+		}
+		catch(NumberFormatException e)
+		{
+			JOptionPane.showMessageDialog(null, "Posições em branco.", "Erro", JOptionPane.ERROR_MESSAGE);
+			return null;
+		}
+		return s;
+	}
+	
+	public Secao getSecaoSelecionada()
+	{
+		Secao s = getListaSecao().getSelectedValue();
+		s.setNome(nomeSessao_in.getText());
+		try{
+			if(coordenadaXFinal_in.getText()==null || coordenadaXFinal_in.getText().isEmpty()) s.setxFinal(0);
+			else s.setxFinal(Integer.parseInt(coordenadaXFinal_in.getText()));
+			if(coordenadaYFinal_in.getText()==null || coordenadaYFinal_in.getText().isEmpty()) s.setyFinal(0);
+			else s.setyFinal(Integer.parseInt(coordenadaYFinal_in.getText()));
+			if(coordenadaXInicial_in.getText()==null || coordenadaXInicial_in.getText().isEmpty()) s.setxInicial(0);
+			else s.setxInicial(Integer.parseInt(coordenadaXInicial_in.getText()));
+			if(coordenadaYInicial_in.getText()==null || coordenadaYInicial_in.getText().isEmpty()) s.setyFinal(0);
+			else s.setyInicial(Integer.parseInt(coordenadaYInicial_in.getText()));
+		}
+		catch(NumberFormatException e)
+		{
+			JOptionPane.showMessageDialog(null, "Posições em branco.", "Erro", JOptionPane.ERROR_MESSAGE);
+			return null;
+		}
+		return s;
+	}
+	
+	public void alterarDados(String nome, String xi, String xf, String yi, String yf)
+	{
+		nomeSessao_in.setText(nome);
+		coordenadaXFinal_in.setText(xf);
+		coordenadaYFinal_in.setText(yf);
+		coordenadaXInicial_in.setText(xi);
+		coordenadaYInicial_in.setText(yi);
+	}
+	
+	public JList<Secao> getListaSecao()
+	{
+		return listaSecoes;
+	}
+	
+	public void clicarBotaoSalvar()
+	{
+		botaoSalvar.doClick();
 	}
 }
 

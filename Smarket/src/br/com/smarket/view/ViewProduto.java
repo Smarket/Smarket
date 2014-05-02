@@ -1,10 +1,12 @@
 package br.com.smarket.view;
 
 import java.awt.Color;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -14,6 +16,8 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import br.com.smarket.controller.ProdutoController;
+import br.com.smarket.controller.SecaoController;
 import br.com.smarket.model.Produto;
 import br.com.smarket.model.Secao;
 
@@ -30,13 +34,26 @@ public class ViewProduto extends JPanel{
 	
 	private int panelSizeX;
 	private int panelSizeY;
-	JPanel panelNovoEditar;
+	private JPanel panelNovoEditar;
+	private JButton buttonSalvar;
+	private JButton buttonNovo;
+	private JButton buttonRemover;
+	private JTextField textNomeProduto;
+	private JTextField textPeso;
+	private JComboBox<Secao> textBoxSessao;
+	private JList<Produto> listaProdutos;
+	private DefaultListModel<Produto> listaModel;
+	private JCheckBox checkBoxTemperatura;
+	private ProdutoController produtoController;
 	
 	//construtor por default
 	public ViewProduto(){
 		panelSizeX = 800;
-		panelSizeY = 800;
+		panelSizeY = 600;
+		this.produtoController = new ProdutoController();
 		this.createPanel();
+		//this.atualizarLista();
+		//this.atualizarSecoes();
 	}
 
 	//método para criar o panel
@@ -55,10 +72,10 @@ public class ViewProduto extends JPanel{
 	//método para criar a lista de produtos
 	public void createListProdutos(){
 
-		DefaultListModel<Produto> listaModel = new DefaultListModel<Produto>();
-		JList<Produto> listaProdutos = new JList<Produto>(listaModel);
-		
-
+		listaModel = new DefaultListModel<Produto>();
+		listaProdutos = new JList<Produto>();
+		listaProdutos.setModel(listaModel);
+		listaProdutos.addListSelectionListener(produtoController);
 		JScrollPane scrollList = new JScrollPane(listaProdutos);
 		scrollList.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY,1,true));
 		scrollList.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -85,10 +102,6 @@ public class ViewProduto extends JPanel{
 		labelPeso.setBounds(40, 175, 300, 30);
 		panelNovoEditar.add(labelPeso);
 
-		JLabel labelTempArmz = new JLabel("Temperatura de Armazenamento");
-		labelTempArmz.setBounds(260, 175, 300, 30);
-		panelNovoEditar.add(labelTempArmz);
-
 	}
 
 	public void createPanelNovoEditar(){
@@ -97,46 +110,114 @@ public class ViewProduto extends JPanel{
 		panelNovoEditar.setLayout(null);
 		panelNovoEditar.setBorder(new TitledBorder(new LineBorder(Color.LIGHT_GRAY, 1, true), "Novo/Editar Produtos"));
 		panelNovoEditar.setBounds(290, 15, 485, 372);
+		panelNovoEditar.setName("panelEdicao");
 		this.add(panelNovoEditar);
 	}
+	
 	//método para criar as caixas de texto
 	public void createTextBox(){
 
-		JTextField textNomeProduto = new JTextField();
-		textNomeProduto.setBounds(40, 110, 150, 20);
+		textNomeProduto = new JTextField();
+		textNomeProduto.setBounds(40, 105, 150, 24);
 		panelNovoEditar.add(textNomeProduto);
 
-		JTextField textPeso = new JTextField();
-		textPeso.setBounds(40, 205, 150, 20);
+		textPeso = new JTextField();
+		textPeso.setBounds(40, 200, 150, 24);
+		textPeso.addKeyListener(produtoController);
 		panelNovoEditar.add(textPeso);
 		
-		JComboBox<Secao> textBoxSessao = new JComboBox<Secao>();
-		textBoxSessao.setBounds(260, 110, 150, 20);
+		textBoxSessao = new JComboBox<Secao>();
+		textBoxSessao.setBounds(260, 105, 150, 24);
+		textBoxSessao.addKeyListener(produtoController);
 		panelNovoEditar.add(textBoxSessao);
 
-		JComboBox<String> textTemperatura = new JComboBox<String>();
-		textTemperatura.setBounds(260, 205, 150, 20);
-		textTemperatura.insertItemAt("Normal", 0);
-		textTemperatura.insertItemAt("Baixa", 1);
-		textTemperatura.setSelectedIndex(0);
-		panelNovoEditar.add(textTemperatura);
+		checkBoxTemperatura = new JCheckBox("Baixa Temperatura");
+		checkBoxTemperatura.setBounds(39, 250, 150, 22);
+		checkBoxTemperatura.addKeyListener(produtoController);
+		panelNovoEditar.add(checkBoxTemperatura);
 	
 	}
 
 	//método para criar os botões
 	public void createButtons(){
 
-		JButton buttonNovo = new JButton("Novo");		      
+		this.buttonNovo = new JButton("Novo");		      
 		buttonNovo.setBounds(10, 362, 80, 25);
+		buttonNovo.addActionListener(produtoController);
 		this.add(buttonNovo);
 
-		JButton buttonRemover = new JButton("Remover");		      
+		this.buttonRemover = new JButton("Remover");		      
 		buttonRemover.setBounds(200, 362, 80, 25);
+		buttonRemover.addActionListener(produtoController);
 		this.add(buttonRemover);
 
-		JButton buttonSalvar = new JButton("Salvar");		      
+		this.buttonSalvar = new JButton("Salvar");		      
 		buttonSalvar.setBounds(373, 327, 80, 25);
+		buttonSalvar.addActionListener(produtoController);
 		panelNovoEditar.add(buttonSalvar);
+	}
+	
+	public void atualizarLista()
+	{
+		int i = listaProdutos.getSelectedIndex();
+		listaModel.clear();
+		List<Produto> produtos = produtoController.listarProdutos();
+		for(Produto p : produtos)
+		{
+			listaModel.addElement(p);
+		}
+		listaProdutos.setSelectedIndex(i);
+		
+	}
+	
+	public void atualizarSecoes(){
+		List<Secao> secoes = new SecaoController().listarSecoes();
+		textBoxSessao.removeAllItems();
+		for(Secao s : secoes){
+			textBoxSessao.addItem(s);
+		}
+		textBoxSessao.setSelectedIndex(-1);
+	}
+
+	public Produto getProdutoNovo()
+	{
+		Produto p = new Produto();
+		p.setNome(textNomeProduto.getText());
+		try{p.setPeso(Double.parseDouble(textPeso.getText()));}
+		catch(NumberFormatException e){ p.setPeso(0);}
+		p.setBaixaTemperatura(checkBoxTemperatura.isSelected());
+		p.setSecao((Secao)textBoxSessao.getSelectedItem());
+		return p;
+	}
+	
+	public Produto getProdutoSelecionado()
+	{
+		Produto p = listaProdutos.getSelectedValue();
+		p.setNome(textNomeProduto.getText());
+		try{p.setPeso(Double.parseDouble(textPeso.getText()));}
+		catch(NumberFormatException e){ p.setPeso(0);}
+		p.setBaixaTemperatura(checkBoxTemperatura.isSelected());
+		p.setSecao((Secao)textBoxSessao.getSelectedItem());
+		return p;
+	}
+	
+	public void alterarDados(String nome, String peso, Secao s, boolean frio)
+	{
+		textNomeProduto.setText(nome);
+		textPeso.setText(peso);
+		checkBoxTemperatura.setSelected(frio);
+		if(s!=null) textBoxSessao.getModel().setSelectedItem(s);
+		else textBoxSessao.setSelectedIndex(-1);
+	}
+	
+	public JList<Produto> getListaProduto()
+	{
+		return listaProdutos;
+	}
+	
+	public void clicarBotaoSalvar()
+	{
+		buttonSalvar.doClick();
 	}
 
 }

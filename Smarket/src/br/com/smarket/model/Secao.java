@@ -37,6 +37,26 @@ public class Secao {
 		this.setProdutos(new ArrayList<Produto>());
 	}
 	
+	public Secao(String nome, int xi, int xf, int yi, int yf, List<Produto> produtos) {
+		this.setNome(nome);
+		this.setxFinal(xi);
+		this.setxInicial(xf);
+		this.setyFinal(yi);
+		this.setyInicial(yf);
+		this.setProdutos(produtos);
+	}
+	
+	public Secao(long id, String nome, int xi, int xf, int yi, int yf, List<Produto> produtos) {
+		this.setId(id);
+		this.setNome(nome);
+		this.setxFinal(xi);
+		this.setxInicial(xf);
+		this.setyFinal(yi);
+		this.setyInicial(yf);
+		this.setProdutos(produtos);
+	}
+	
+	
 	@Override
 	public String toString() {
 		return this.getNome();
@@ -44,7 +64,8 @@ public class Secao {
 	
 	@Override
 	public boolean equals(Object secao) {
-		return this.getId()==(((Secao) secao).getId());
+		if (secao!=null) return this.getId()==(((Secao) secao).getId());
+		else return false;
 	}
 
 	public long getId() {

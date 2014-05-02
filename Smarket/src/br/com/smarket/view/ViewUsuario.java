@@ -8,6 +8,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.List;
 
 import javax.swing.*;
@@ -46,7 +48,6 @@ public class ViewUsuario extends JPanel{
 		private static final int ALT_BOTAO_USUARIO = 25;
 		private static final int ESPACAMENTO = 10;
 		
-		private Controller controller = new Controller();
 		private UsuarioController usuarioController = new UsuarioController();
 		
 		private JList<Usuario> listUsuarios = new JList<Usuario>(new DefaultListModel<Usuario>());
@@ -65,19 +66,19 @@ public class ViewUsuario extends JPanel{
 			JPanel buttons = new JPanel(new BorderLayout());
 			buttons.setBorder(new EmptyBorder(new Insets(3, 0, 0, 0)));
 			buttonAdicionar.setPreferredSize(new Dimension(LAR_BOTAO_USUARIO, ALT_BOTAO_USUARIO));
-			buttonAdicionar.addActionListener(controller);
+			buttonAdicionar.addActionListener(usuarioController);
 			buttonRemover.setPreferredSize(new Dimension(LAR_BOTAO_USUARIO, ALT_BOTAO_USUARIO));
-			buttonRemover.addActionListener(controller);
+			buttonRemover.addActionListener(usuarioController);
 			buttons.add(buttonAdicionar, BorderLayout.LINE_START);
 			buttons.add(buttonRemover, BorderLayout.LINE_END);
 			this.add(buttons, BorderLayout.PAGE_END);
 			
-			listUsuarios.addListSelectionListener(controller);
+			listUsuarios.addListSelectionListener(usuarioController);
 			JScrollPane listScrollUsuarios = new JScrollPane();
 			listScrollUsuarios.setViewportView(listUsuarios);
 			listScrollUsuarios.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 			listScrollUsuarios.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
-			this.atualizarLista();
+			//this.atualizarLista();
 			this.add(listScrollUsuarios, BorderLayout.CENTER);
 		
 		}
@@ -108,7 +109,7 @@ public class ViewUsuario extends JPanel{
 		private static final int LAR_BOTAO_USUARIO = 80;
 		private static final int ALT_BOTAO_USUARIO = 25;
 		
-		private Controller controller = new Controller();
+		private UsuarioController usuarioController = new UsuarioController();
 		private JLabel labelNome = new JLabel("Nome de Usuário");
 		private JLabel labelSenha = new JLabel("Senha");
 		private JLabel labelConfirmar = new JLabel("Confirmação de Senha");
@@ -123,6 +124,7 @@ public class ViewUsuario extends JPanel{
 		public PainelDadosUsuario() {
 			this.setLayout(new BorderLayout());
 			this.setBorder(new EmptyBorder(MARGEM+5, 0, 3, MARGEM-1));
+			this.setName("PainelDadosUsuario");
 			
 			JPanel panelUsuario = new JPanel(new GridBagLayout());
 			panelUsuario.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1 , true), "Novo/Editar Usuário"));
@@ -134,29 +136,35 @@ public class ViewUsuario extends JPanel{
 			c.gridx = 0;
 			c.gridy = 0;
 			panelUsuario.add(labelNome, c);
+			
 			c.insets = new Insets(0, 0, ESPACAMENTO_V_CAIXAS, ESPACAMENTO_H_CAIXAS);
 			c.ipadx = LAR_CAIXA_TXT;
 			c.ipady = ALT_CAIXA_TXT;
 			c.gridx = 0;
 			c.gridy = 1;
 			panelUsuario.add(textNome, c);
+			
 			c.insets = new Insets(0, 0, 3, ESPACAMENTO_H_CAIXAS);
 			c.ipadx = 0;
 			c.ipady = 0;
 			c.gridx = 0;
 			c.gridy = 2;
 			panelUsuario.add(labelSenha, c);
+			
 			c.insets = new Insets(0, 0, 3, 0);
 			c.gridx = 1;
 			panelUsuario.add(labelConfirmar, c);
+			
 			c.insets = new Insets(0, 0, 0, ESPACAMENTO_H_CAIXAS);
 			c.ipadx = LAR_CAIXA_TXT;
 			c.ipady = ALT_CAIXA_TXT;
 			c.gridx = 0;
 			c.gridy = 3;
 			panelUsuario.add(textSenha, c);
+			
 			c.insets = new Insets(0, 0, 0, 0);
 			c.gridx = 1;
+			textConfirmar.addKeyListener(usuarioController);
 			panelUsuario.add(textConfirmar, c);
 			
 			c.insets = new Insets(ESPACAMENTO_V_SELECAO, 0, 0, 0);
@@ -166,13 +174,18 @@ public class ViewUsuario extends JPanel{
 			c.gridx=0;
 			c.gridy=4;
 			panelUsuario.add(labelTipo, c);
+			
 			c.insets = new Insets(0, 0, 0, 0);
 			ButtonGroup b = new ButtonGroup();
 			b.add(buttonComum);
 			b.add(buttonAdmin);
+			buttonAdmin.addKeyListener(usuarioController);
+			buttonComum.addKeyListener(usuarioController);
 			buttonComum.setSelected(true);
+			
 			c.gridy=5;
 			panelUsuario.add(buttonAdmin, c);
+			
 			c.gridy=6;
 			panelUsuario.add(buttonComum, c);
 			
@@ -181,105 +194,57 @@ public class ViewUsuario extends JPanel{
 			c.anchor = GridBagConstraints.LINE_END;
 			buttonSalvar.setMinimumSize(new Dimension(LAR_BOTAO_USUARIO, ALT_BOTAO_USUARIO));
 			panelUsuario.add(buttonSalvar, c);
-			buttonSalvar.addActionListener(controller);
+			buttonSalvar.addActionListener(usuarioController);
+			
 		}
-		public void alterarDados(String nome, String senha, boolean admin)
-		{
-			this.textNome.setText(nome);
-			this.textSenha.setText(senha);
-			this.textConfirmar.setText(senha);
-			buttonAdmin.setSelected(admin);
-			buttonComum.setSelected(!admin);
-		}
-		
-		public String getNome()
-		{
-			return textNome.getText();
-		}
-		
-		public boolean getAdmin()
-		{
-			return buttonAdmin.isSelected();
-		}
-		
-		public String getSenha()
-		{
-			return new String(textSenha.getPassword());
-		}
-		
-		public String getConfirmar()
-		{
-			return new String(textConfirmar.getPassword());
-		}
-		
+	}	
+	
+	public void alterarDados(String nome, String senha, boolean admin)
+	{
+		this.painelDados.textNome.setText(nome);
+		this.painelDados.textSenha.setText(senha);
+		this.painelDados.textConfirmar.setText(senha);
+		this.painelDados.buttonAdmin.setSelected(admin);
+		this.painelDados.buttonComum.setSelected(!admin);
 	}
-	class Controller implements ActionListener, ListSelectionListener{
-
-		public void actionPerformed(ActionEvent event) {
-			
-			switch (event.getActionCommand()){
-			
-				case "Salvar":
-					if(painelDados.getSenha().equals(painelDados.getConfirmar())) {
-						Usuario u = new Usuario();
-						u.setLogin(painelDados.getNome());
-						u.setSenha(painelDados.getSenha());
-						u.setAdministrador(painelDados.getAdmin());
-						if(painelLista.listUsuarios.getSelectedIndex()==-1)
-						{
-							
-							if (!((DefaultListModel<Usuario>)painelLista.listUsuarios.getModel()).contains(u))
-							{
-								new UsuarioController().cadastrarUsuario(u);
-							}
-							else
-							{
-								// mandar view exibir erro de usuario existente
-							}
-							
-						}
-						else new UsuarioController().alterarUsuario(u);
-						painelLista.atualizarLista();
-					}
-					else {
-						// mandar view exibir erro de confirmação de senha incorreta
-					}
-					break;
-				
-				case "Novo":
-					painelDados.textNome.setEnabled(true);
-					painelLista.listUsuarios.clearSelection();
-					painelDados.alterarDados(null,null,false);
-					break;
-					
-				case "Remover":
-					Usuario u = new Usuario();
-					u.setLogin(painelDados.getNome());
-					u.setSenha(painelDados.getSenha());
-					u.setAdministrador(painelDados.getAdmin());
-					new UsuarioController().removerUsuario(u);
-					painelDados.alterarDados(null,null,false);
-					painelLista.atualizarLista();
-					break;
-					
-				default:
-					break;
-			}
-		}
-
-		@SuppressWarnings("unchecked")
-		public void valueChanged(ListSelectionEvent event) {
-			if(event.getValueIsAdjusting()==false)
-			{
-				
-				if(!((JList<Usuario>)event.getSource()).isSelectionEmpty()){
-					painelDados.textNome.setEnabled(false);
-					Usuario u = (Usuario)((JList<Usuario>)event.getSource()).getSelectedValue();
-					painelDados.alterarDados(u.getLogin(), u.getSenha(), u.getAdministrador());
-				}	
-			}
-			
-		}
-		
+	
+	public String getNome()
+	{
+		return this.painelDados.textNome.getText();
+	}
+	
+	public void habilitarNome(boolean habilitar)
+	{
+		this.painelDados.textNome.setEnabled(habilitar);
+	}
+	
+	public boolean getAdmin()
+	{
+		return this.painelDados.buttonAdmin.isSelected();
+	}
+	
+	public String getSenha()
+	{
+		return new String(this.painelDados.textSenha.getPassword());
+	}
+	
+	public String getConfirmar()
+	{
+		return new String(this.painelDados.textConfirmar.getPassword());
+	}
+	
+	public void atualizarLista()
+	{
+		this.painelLista.atualizarLista();
+	}
+	
+	public void clicarBotaoSalvar()
+	{
+		this.painelDados.buttonSalvar.doClick();
+	}
+	
+	public JList<Usuario> getLista()
+	{
+		return this.painelLista.listUsuarios;
 	}
 }

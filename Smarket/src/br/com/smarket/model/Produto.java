@@ -32,6 +32,22 @@ public class Produto {
 		this.setSecao(null);
 	}
 	
+	public Produto(String nome, double peso, boolean BaixaTemperatura, Secao secao) {
+		this.setId(id);
+		this.setNome(nome);
+		this.setPeso(peso);
+		this.setBaixaTemperatura(baixaTemperatura);
+		this.setSecao(secao);
+	}
+	
+	public Produto(long id, String nome, double peso, boolean BaixaTemperatura, Secao secao) {
+		this.setId(id);
+		this.setNome(nome);
+		this.setPeso(peso);
+		this.setBaixaTemperatura(baixaTemperatura);
+		this.setSecao(secao);
+	}
+	
 	@Override
 	public String toString() {
 		return this.getNome();

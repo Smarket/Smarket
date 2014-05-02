@@ -6,6 +6,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import br.com.smarket.controller.SmarketException;
 import br.com.smarket.util.HibernateUtil;
 
 public abstract class BaseDAO <T>{
@@ -31,6 +32,7 @@ public abstract class BaseDAO <T>{
         	if(!t.wasCommitted()){
         		t.rollback();
         	}
+        	throw e;
         } finally{
         	 this.sessao.close();
         }
