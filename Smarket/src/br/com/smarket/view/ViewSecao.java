@@ -70,6 +70,7 @@ public class ViewSecao extends JPanel{
 			listaSecoes.setOpaque(true);
 			listaSecoes.setBackground(Color.white);
 			listaSecoes.addListSelectionListener(secaoController);
+			listaSecoes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			
 			
 			nomeSessao = new JLabel("Nome da Seção");

@@ -3,26 +3,18 @@ package br.com.smarket.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.List;
-
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
-
 import org.hibernate.HibernateException;
 import org.hibernate.exception.ConstraintViolationException;
-
 import br.com.smarket.dao.SecaoDAO;
 import br.com.smarket.model.Secao;
 import br.com.smarket.model.Usuario;
 import br.com.smarket.view.ViewProduto;
 import br.com.smarket.view.ViewSecao;
-import br.com.smarket.view.ViewUsuario;
 
 
 public class SecaoController extends Controller{

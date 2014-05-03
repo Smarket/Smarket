@@ -3,22 +3,14 @@ package br.com.smarket.controller;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
-
 import br.com.smarket.dao.SecaoDAO;
 import br.com.smarket.model.Secao;
 import br.com.smarket.view.ViewMapa;
-import br.com.smarket.view.ViewSecao;
-
 import java.sql.*;
-import java.io.*;
-
-import org.apache.commons.net.ftp.*;
 
 
 public class MapaController extends Controller{

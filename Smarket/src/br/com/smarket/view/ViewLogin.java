@@ -1,23 +1,14 @@
 package br.com.smarket.view;
 
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.Insets;
 import java.util.List;
-
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JTabbedPane;
+
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
@@ -29,6 +20,8 @@ import br.com.smarket.controller.UsuarioController;
 import br.com.smarket.model.Usuario;
 
 public class ViewLogin extends JPanel{
+	
+	private static final long serialVersionUID = 1L;
 	
 	private JTextField login;
 	private JPasswordField password;
@@ -71,29 +64,36 @@ public class ViewLogin extends JPanel{
 		
 		Usuario user = new Usuario();
 		user.setLogin(login.getText());
-		List<Usuario> lista = (List<Usuario>) new UsuarioController().buscarUsuarios();
-		if(lista.contains(user)){
-			user = lista.get(lista.indexOf(user));
-			if(user.getSenha().equals(new String(password.getPassword())))
-			{
-				user.autenticar(new String(password.getPassword()));
-				try {
-					new UsuarioController().alterarUsuario(user);
-				} catch (SmarketException e) {
-					e.printStackTrace();
+		try
+		{
+			List<Usuario> lista = (List<Usuario>) new UsuarioController().buscarUsuarios();
+			if(lista.contains(user)){
+				user = lista.get(lista.indexOf(user));
+				if(user.getSenha().equals(new String(password.getPassword())))
+				{
+					user.autenticar(new String(password.getPassword()));
+					try {
+						new UsuarioController().alterarUsuario(user);
+					} catch (SmarketException e) {
+						e.printStackTrace();
+					}
+					ViewTabs.setNomeLogado(user.getLogin());
+					SwingUtilities.getWindowAncestor(this).dispose();
 				}
-				ViewTabs.setNomeLogado(user.getLogin());
-				SwingUtilities.getWindowAncestor(this).dispose();
+				else
+				{
+					status.setText("Erro: Senha incorreta.");
+				}
 			}
 			else
 			{
-				status.setText("Erro: Senha incorreta.");
+				status.setText("Erro: Usuário não existe.");
 			}
+		} 
+		catch (Exception e){
+			status.setText("Não foi possível se conectar.");
 		}
-		else
-		{
-			status.setText("Erro: Usuário não existe.");
-		}
+		
 	}
 	
 	public void clicarBotaoLogin()

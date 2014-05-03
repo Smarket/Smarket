@@ -5,21 +5,15 @@ import java.awt.Cursor;
 import java.awt.event.*;
 import java.io.*;
 import java.util.List;
-
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-
 import br.com.smarket.model.Usuario;
 import br.com.smarket.view.ViewLogin;
-import br.com.smarket.view.ViewMapa;
 import br.com.smarket.view.ViewProduto;
 import br.com.smarket.view.ViewSecao;
 import br.com.smarket.view.ViewTabs;
@@ -27,9 +21,6 @@ import br.com.smarket.view.ViewUsuario;
 
 public class Controller implements ActionListener, WindowListener, ListSelectionListener, KeyListener, Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public void actionPerformed(ActionEvent e) {
@@ -59,7 +50,10 @@ public class Controller implements ActionListener, WindowListener, ListSelection
 				else view.habilitarAbas(true, false);
 				for(int i=0; i<view.getNumAbas(); i++) if(view.getAba(i).isEnabled()){
 					JPanel panel = view.getAba(i);
-					if(panel instanceof ViewProduto) ((ViewProduto)panel).atualizarLista();
+					if(panel instanceof ViewProduto){
+						((ViewProduto)panel).atualizarLista();
+						((ViewProduto)panel).atualizarSecoes();
+					}
 					if(panel instanceof ViewSecao) ((ViewSecao)panel).atualizarLista();
 					if(panel instanceof ViewUsuario) ((ViewUsuario)panel).atualizarLista();
 				}

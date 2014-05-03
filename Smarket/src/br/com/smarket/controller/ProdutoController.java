@@ -3,25 +3,15 @@ package br.com.smarket.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.List;
-
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
-
 import org.hibernate.HibernateException;
-
 import br.com.smarket.dao.ProdutoDAO;
 import br.com.smarket.model.Produto;
-import br.com.smarket.model.Secao;
 import br.com.smarket.model.Usuario;
 import br.com.smarket.view.ViewProduto;
-import br.com.smarket.view.ViewSecao;
-
 
 public class ProdutoController extends Controller{
 
@@ -82,7 +72,6 @@ public class ProdutoController extends Controller{
 				if(view.getListaProduto().getSelectedIndex()==-1)
 				{
 					Produto produto = view.getProdutoNovo();
-					JList<Produto> lista = view.getListaProduto();
 					try{this.inserirProduto(produto);}
 					catch(SmarketException e){JOptionPane.showMessageDialog(null,e.getMessage(),"Erro",JOptionPane.ERROR_MESSAGE);}
 				}

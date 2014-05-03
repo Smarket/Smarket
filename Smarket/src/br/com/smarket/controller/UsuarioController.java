@@ -3,21 +3,13 @@ package br.com.smarket.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.List;
-
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.event.ListSelectionEvent;
-
 import org.hibernate.HibernateException;
 import org.hibernate.exception.ConstraintViolationException;
-
 import br.com.smarket.dao.UsuarioDAO;
 import br.com.smarket.model.Usuario;
-import br.com.smarket.view.ViewSecao;
 import br.com.smarket.view.ViewTabs;
 import br.com.smarket.view.ViewUsuario;
 
@@ -85,7 +77,7 @@ public class UsuarioController extends Controller {
 					if(u.getAutenticado() && u.getAdministrador() == false) 
 					{
 						JOptionPane.showMessageDialog(null,
-							"Não é possível diminuir o papel de um usuário logado.","Erro",JOptionPane.ERROR_MESSAGE);
+							"Não é possível diminuir o papel de você mesmo.","Erro",JOptionPane.ERROR_MESSAGE);
 					}
 					else
 					{
@@ -132,7 +124,6 @@ public class UsuarioController extends Controller {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public void valueChanged(ListSelectionEvent event) {
 		JComponent component = (JComponent) event.getSource();
 		while(!(component instanceof ViewUsuario)) component = (JComponent) component.getParent();

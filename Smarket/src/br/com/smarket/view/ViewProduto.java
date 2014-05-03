@@ -13,6 +13,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
@@ -74,6 +75,7 @@ public class ViewProduto extends JPanel{
 
 		listaModel = new DefaultListModel<Produto>();
 		listaProdutos = new JList<Produto>();
+		listaProdutos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listaProdutos.setModel(listaModel);
 		listaProdutos.addListSelectionListener(produtoController);
 		JScrollPane scrollList = new JScrollPane(listaProdutos);

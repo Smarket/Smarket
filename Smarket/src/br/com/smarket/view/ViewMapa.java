@@ -3,11 +3,9 @@ package br.com.smarket.view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -142,6 +140,7 @@ public class ViewMapa extends JPanel{
 	
 	class ImagePanel extends JPanel{
 
+		private static final long serialVersionUID = 1L;
 		private BufferedImage imagem;
 
 		public void setImagem(String caminhoImagem) {

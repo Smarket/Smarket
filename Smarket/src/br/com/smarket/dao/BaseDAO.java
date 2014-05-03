@@ -5,8 +5,6 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
-import br.com.smarket.controller.SmarketException;
 import br.com.smarket.util.HibernateUtil;
 
 public abstract class BaseDAO <T>{

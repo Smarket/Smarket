@@ -1,30 +1,24 @@
 package br.com.smarket.view;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Toolkit;
-import java.net.URL;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import br.com.smarket.controller.Controller;
@@ -38,13 +32,12 @@ public class ViewTabs extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					
 					ViewTabs frame = new ViewTabs();
+					HibernateUtil.getSessionFactory(); 
 					frame.setVisible(true);					
 					frame.addWindowListener(new Controller());
-					frame.setIconImage(ImageIO.read(getClass().getResource("/imagens/SmarketLogo.jpg")));
+					frame.setIconImage(ImageIO.read(getClass().getResource("/IconSmarket.png")));
 					frame.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-					HibernateUtil.getSessionFactory(); 
 					frame.setCursor(Cursor.getDefaultCursor());
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -79,7 +72,7 @@ public class ViewTabs extends JFrame {
 		lblNome.setBounds(550, 8, 95, 33);
 		getContentPane().add(lblNome);
 
-		Image imagem = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/imagens/SmarketLogo.jpg"));  
+		Image imagem = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/SmarketLogo.jpg"));  
 		ImageIcon logo = new ImageIcon(imagem);
 		JLabel lblImage = new JLabel(logo);
 		lblImage.setBounds(653, 7, 120, 50);
@@ -118,6 +111,7 @@ public class ViewTabs extends JFrame {
 		}
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public void habilitar(Container c, boolean habilitar)
 	{
 		Component[] components = c.getComponents();
