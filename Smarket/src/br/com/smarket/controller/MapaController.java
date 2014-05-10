@@ -85,7 +85,7 @@ class salvarMapa{
 			psmnt.setBinaryStream(1, (InputStream)fis, (int)(imagem.length()));
 			int s = psmnt.executeUpdate();
 			if(s>0) {
-				JOptionPane.showMessageDialog(null,"Mapa atualizado com sucesso!.","Erro",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null,"Mapa atualizado com sucesso!","Sucesso",JOptionPane.INFORMATION_MESSAGE);
 			}
 			else {
 				JOptionPane.showMessageDialog(null,"Erro ao salvar mapa.","Erro",JOptionPane.ERROR_MESSAGE);

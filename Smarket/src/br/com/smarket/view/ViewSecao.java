@@ -60,7 +60,7 @@ public class ViewSecao extends JPanel{
 			paneOpcoes.setBounds(290, 15, 485, 372);
 			paneOpcoes.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1 , true), "Novo/Editar Seção"));
 
-			sessoes = new JLabel("Sessões");
+			sessoes = new JLabel("Seções");
 			sessoes.setBounds(10, 0, 290, 26);			
 			
 			produtos_parent.setBounds(10, sessoes.getHeight()-5, 270, 337);

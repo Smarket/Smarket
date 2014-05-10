@@ -96,7 +96,7 @@ public class ViewProduto extends JPanel{
 		labelNomeProduto.setBounds(40, 80, 300, 30);
 		panelNovoEditar.add(labelNomeProduto);
 		
-		JLabel labelSessao = new JLabel("Sessao");
+		JLabel labelSessao = new JLabel("Seção");
 		labelSessao.setBounds(260, 80, 300, 30);
 		panelNovoEditar.add(labelSessao);
 

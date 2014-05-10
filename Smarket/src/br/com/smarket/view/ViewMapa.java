@@ -71,13 +71,13 @@ public class ViewMapa extends JPanel{
 	}
 
 	private void setBound() {
-		this.panelUpload.setBounds(10, 7, 300, 380);
-		this.panelImage.setBounds(320, 7, 455, 380);
-		this.txtArquivo.setBounds(15, 130, 190,25);
-		this.btnAbrir.setBounds(210, 130, 75, 25);
-		this.btnExcluir.setBounds(15, 340, 75, 25);
-		this.btnSalvar.setBounds(210, 340, 75, 25);
-		this.scrollImagem.setBounds(15, 20, 425, 345);
+		this.panelUpload.setBounds(10, 330, 760, 50);
+		this.panelImage.setBounds(10, 7, 760, 320);
+		this.txtArquivo.setBounds(200, 15, 350,25);
+		this.btnAbrir.setBounds(555, 15, 75, 25);
+		this.btnExcluir.setBounds(100, 15, 75, 25);
+		this.btnSalvar.setBounds(15, 15, 75, 25);
+		this.scrollImagem.setBounds(15, 20, 730, 290);
 	}
 	
 	private void addOnPanels() {
@@ -136,29 +136,6 @@ public class ViewMapa extends JPanel{
 	
 	public String getTextoArquivo(){
 		return this.txtArquivo.getText();
-	}
-	
-	class ImagePanel extends JPanel{
-
-		private static final long serialVersionUID = 1L;
-		private BufferedImage imagem;
-
-		public void setImagem(String caminhoImagem) {
-			if(caminhoImagem!=null){
-				try {                
-					this.imagem = ImageIO.read(new File(caminhoImagem));
-				} catch (IOException ex){
-				}
-			}
-			else imagem = null;
-			this.setPreferredSize(new Dimension(imagem.getWidth(), imagem.getHeight()));
-		}
-
-		@Override
-		protected void paintComponent(Graphics g) {
-			super.paintComponent(g);
-			g.drawImage(imagem, 0, 0, null);     
-		}
 	}
 }
 
